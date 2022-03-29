@@ -15,7 +15,7 @@
 %  additions which check for and create a dark mode type document
 %  All additions in this document have been marked under a header 
 %  "THIS IS A MODIFICATION" and contain some reference to "darkmode" as well as
-%  bookend comments contain equal signs such as the line below.  
+%  bookend comments containing equal signs such as the line below.  
 % ===========================================================================
 
 \def\currversion{6.3.1f}
