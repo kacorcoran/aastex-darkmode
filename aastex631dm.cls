@@ -5,6 +5,19 @@
 %% Copyright 2021 American Astronomical Society   %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ===========================================================================
+%  aastex631dm.cls is a modified version of AASTEX631.cls 
+%  last modified on Mar 29, 2022.  I am not affiliated with 
+%  the upkeep of the actual AASTEX631.cls file and do not
+%  own the licensing for it.  Nothing about the 
+%  default output of AASTEX631.cls has been changed, there are only
+%  additions which check for and create a dark mode type document
+%  All additions in this document have been marked under a header 
+%  "THIS IS A MODIFICATION" and contain some reference to "darkmode" as well as
+%  bookend comments contain equal signs such as the line below.  
+% ===========================================================================
+
 \def\currversion{6.3.1f}
 
 %%
@@ -259,8 +272,13 @@ access fonts for the \string\astro\space command
 \newif\ifanonymous
 \DeclareOption{anonymous}{\global\anonymoustrue}
 
+% ===========================================================================
+% THIS IS A MODIFCATION
+% this modification allows checks for darkmode commnads
+% ===========================================================================
 \newif\ifdarkmode
 \DeclareOption{darkmode}{\global\darkmodetrue}
+% ===========================================================================
 
 
 %% End AH Options
@@ -655,13 +673,21 @@ revtex4-1.cls^^J^^J}\stop
 \expandafter\gdef\csname report\the\rptnum\endcsname{\hbox to
 \textwidth{\hskip.75\textwidth\relax#1\relax\hfill}}}
 
+% ===========================================================================
+% THIS IS A MODIFICAITON
+% this modification calls the dark mode style changes and displays that
+% the document has been compiled using the modified version with the 
+% -- darkmode keyword in the header.   If the darkmode addition is not called
+% the document will be displayed in the normal aas format, all of which have
+% not been modified in any way
+% ===========================================================================
 \ifdarkmode
 \long\def\frontmatter@title@above{
 \ifrnaas
 \vspace*{-\headsep}\vspace*{\headheight}
 \footnotesize
 \noindent{\sc Draft version \today}\\[2pt]
-{\footnotesize Typeset using \LaTeX\ {\bf RNAAS -- darkmode} style in AASTeX631}
+{\footnotesize Typeset using \LaTeX\ {\bf RNAAS -- darkmode} --- a modified style of AASTeX631}
 \par\vspace*{-\baselineskip}\vspace*{0.625in}
 \else
 \vbox to 0pt{\vskip-48pt\normalsize\rptloopnum=0\loop
@@ -679,7 +705,7 @@ revtex4-1.cls^^J^^J}\stop
 \raggedright
 {\sc Draft version \today}\\[2pt]
 {\footnotesize
-Typeset using \LaTeX\ {\bf modern -- darkmode} style in AASTeX631}
+Typeset using \LaTeX\ {\bf modern -- darkmode} --- a modified style of AASTeX631}
 \vskip48pt
 }
 \else
@@ -688,7 +714,7 @@ Typeset using \LaTeX\ {\bf modern -- darkmode} style in AASTeX631}
 \vspace*{-\headsep}\vspace*{\headheight}
 \footnotesize
 \noindent{\sc Draft version \today}\\[2pt]
-{\footnotesize Typeset using \LaTeX\ {\bf preprint -- darkmode} style in AASTeX631}
+{\footnotesize Typeset using \LaTeX\ {\bf preprint -- darkmode} --- a modified style of AASTeX631}
 \par\vspace*{-\baselineskip}\vspace*{0.625in}
 \else
 %%
@@ -696,8 +722,7 @@ Typeset using \LaTeX\ {\bf modern -- darkmode} style in AASTeX631}
 \vspace*{-\headsep}\vspace*{\headheight}
 \footnotesize
 {\footnotesize\textsc{\@journalinfo}}\par
-{\footnotesize Typeset using \LaTeX\ {\bf preprint2 -- darkmode} style in
-AASTeX631}
+{\footnotesize Typeset using \LaTeX\ {\bf preprint2 -- darkmode} --- a modified style of AASTeX631}
 \par\vspace*{-\baselineskip}\vspace*{0.625in}
 
 \else
@@ -706,23 +731,21 @@ AASTeX631}
 \vspace*{-\headsep}\vspace*{\headheight}
 \footnotesize
 {\footnotesize\textsc{\@journalinfo}}\par
-{\footnotesize Typeset using \LaTeX\ {\bf twocolumn -- darkmode} style in
-AASTeX631}
+{\footnotesize Typeset using \LaTeX\ {\bf twocolumn -- darkmode} --- a modified style of AASTeX631}
 \par\vspace*{-\baselineskip}\vspace*{0.625in}
 \else
 \ifmanu
 \vspace*{-\headsep}\vspace*{\headheight}
 \footnotesize
 \noindent\textsc{\@journalinfo}\\[-8pt]
-{\footnotesize Typeset using \LaTeX\ {\bf manuscript -- darkmode} style in
-AASTeX631}
+{\footnotesize Typeset using \LaTeX\ {\bf manuscript -- darkmode} --- a modified style of AASTeX631}
 \par\vspace*{-\baselineskip}\vspace*{0.625in}
 \else
 %% Default
 \vspace*{-\headsep}\vspace*{\headheight}
 \footnotesize
 {\footnotesize\textsc{\@journalinfo}}\par
-{\footnotesize Typeset using \LaTeX\ default -- {\bf darkmode} style in AASTeX631}%% default style
+{\footnotesize Typeset using \LaTeX\ {\bf default -- darkmode} --- a modified style of AASTeX631}%% default style
 \par\vspace*{-\baselineskip}\vspace*{0.625in}
 \fi\fi\fi\fi\fi
 %%
@@ -804,6 +827,7 @@ AASTeX631}
     %% none of this command will be activated.
 }%
 \fi %% ends test for darkmode
+% ===========================================================================
 
 \def\frontmatter@title@produce{%
  \begingroup
@@ -7436,11 +7460,16 @@ by-18pt\relax#1}}
 
 
 %%%%%%%%%%%%%
+% ===========================================================================
+% THIS IS A MODIFICATION
+% this is the addition of the darkmode style theme.  If the darkmode keyword
+% is not called, the document will be displayed in the default style, none of
+% which has been modified.
+% ===========================================================================
 %% Dark mode
 
-
 \ifdarkmode
-% page color defaults to a grey 2D2F34
+% page color defaults to a grey
 \definecolor{almost_atom}{HTML}{2D2F34}
 \pagecolor{almost_atom}
 
@@ -7468,7 +7497,7 @@ urlcolor=cbfyellow,      % color of external links
 final=true,
  ]{hyperref}
  
-\else % use default light mode style
+\else % use default style
 % hyperref link defaults to "blue" (0000ff) as this matches our publisher produced pdf style
 \definecolor{xlinkcolor}{cmyk}{1,1,0,0}
 
@@ -7486,6 +7515,7 @@ final=true,
  ]{hyperref}
 
 \fi
+% ===========================================================================
 
 %% Use when line numbers are on, and after \usepackage{amsmath}.
 %% Will make line numbering work on math as it would without amsmath.
